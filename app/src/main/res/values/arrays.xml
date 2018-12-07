@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="sort_options">
+        <item>@string/name</item>
+        <item>@string/score</item>
+        <item>@string/endDate</item>
+    </array>
+    <array name="languages_icons">
+        <item>@drawable/ic_c</item>
+        <item>@drawable/ic_objectivec</item>
+        <item>@drawable/ic_python</item>
+        <item>@drawable/ic_ruby</item>
+        <item>@drawable/ic_swift</item>
+    </array>
+</resources>
