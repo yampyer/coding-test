@@ -10,7 +10,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.jeanpigomez.codingtest.R
 import com.jeanpigomez.codingtest.utils.extension.getParentActivity
-import com.squareup.picasso.Picasso
 
 @BindingAdapter("adapter")
 fun setAdapter(view: RecyclerView, adapter: RecyclerView.Adapter<*>) {

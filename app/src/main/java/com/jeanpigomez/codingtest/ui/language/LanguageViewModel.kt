@@ -44,12 +44,11 @@ class LanguageViewModel : BaseViewModel() {
         return convertedDate
     }
 
-    private fun calculateDateDiff(dateString: String): String {
-        var dateConverted = parseDateToFormat(dateString)
-        var now = Date()
+    fun calculateDateDiff(dateString: String): String {
+        val dateConverted = parseDateToFormat(dateString)
+        val now = Date()
 
         var diff = dateConverted.time - now.time
-        var displayText = ""
 
         val secondsInMilli: Long = 1000
         val minutesInMilli = secondsInMilli * 60
@@ -67,7 +66,9 @@ class LanguageViewModel : BaseViewModel() {
 
         val elapsedSeconds = diff / secondsInMilli
 
-        if (elapsedDays < 1) {
+        if (diff < 0) {
+            return "Passed!"
+        } else if (elapsedDays < 1) {
             object : CountDownTimer(dateConverted.time - now.time, 1000) {
 
                 override fun onTick(millisUntilFinished: Long) {
@@ -76,7 +77,6 @@ class LanguageViewModel : BaseViewModel() {
                             TimeUnit.MILLISECONDS.toHours(millisUntilFinished))} minutes, " +
                             "${TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
                             TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))} seconds"
-                    println(displayText)
                 }
 
                 override fun onFinish() {

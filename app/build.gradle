@@ -10,6 +10,10 @@ android {
         enabled = true
     }
 
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+
     defaultConfig {
         applicationId "com.jeanpigomez.codingtest"
         minSdkVersion 21
@@ -31,7 +35,7 @@ android {
         }
     }
     sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
+        main.java.srcDirs += 'src/main/java'
         test.java.srcDirs = ['src/test/kotlin']
         androidTest.java.srcDirs = ['src/androidTest/kotlin']
     }
@@ -71,6 +75,8 @@ dependencies {
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakcanary_version"
 
     testImplementation "junit:junit:$junit_version"
+    testImplementation 'org.mockito:mockito-core:2.10.0'
+    testImplementation 'android.arch.core:core-testing:1.1.1'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation("com.android.support.test.espresso:espresso-core:$espresso_version", {
         exclude group: 'com.android.support', module: 'support-annotations'
