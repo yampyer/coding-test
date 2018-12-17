@@ -9,4 +9,8 @@
     <string name="name">Name</string>
     <string name="score">Score</string>
     <string name="endDate">End Date</string>
+    <string name="sort_error">Sorted not performed</string>
+    <string name="no_data_error">No data to display</string>
+    <string name="time_passed">Passed!</string>
+    <string name="close">Close</string>
 </resources>

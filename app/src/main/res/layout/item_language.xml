@@ -3,9 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
-            name="viewModel"
-            type="com.jeanpigomez.codingtest.ui.language.LanguageViewModel" />
+            name="language"
+            type="com.jeanpigomez.codingtest.model.Language" />
     </data>
 
     <android.support.v7.widget.CardView
@@ -33,7 +34,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/language_icon"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:mutableText="@{viewModel.getLanguageName()}" />
+                android:text="@{language.getName()}" />
 
             <TextView
                 android:id="@+id/language_score"
@@ -44,7 +45,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/language_name"
-                app:mutableText="@{viewModel.getLanguageScore()}" />
+                android:text="@{Integer.toString(language.getScore())}" />
 
             <TextView
                 android:id="@+id/language_remaining_time"
@@ -54,8 +55,7 @@
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/language_score"
-                app:mutableText="@{viewModel.getLanguageRemainingTime()}" />
+                app:layout_constraintTop_toBottomOf="@+id/language_score" />
 
             <ImageView
                 android:id="@+id/language_icon"
@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:imageUrl="@{viewModel.getLanguageName()}" />
+                app:imageUrl="@{language.getName()}" />
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
 </layout>

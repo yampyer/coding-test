@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "91f65790c2aeb73cba111fe6598b4621",
+    "identityHash": "1bc7ab3237b6c93388a285230ae3302e",
     "entities": [
       {
-        "tableName": "Language",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `score` INTEGER NOT NULL, `endDate` TEXT NOT NULL, PRIMARY KEY(`name`))",
+        "tableName": "language",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `score` INTEGER NOT NULL, `endDate` TEXT, PRIMARY KEY(`name`))",
         "fields": [
           {
             "fieldPath": "name",
@@ -24,7 +24,7 @@
             "fieldPath": "endDate",
             "columnName": "endDate",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -39,7 +39,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"91f65790c2aeb73cba111fe6598b4621\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"1bc7ab3237b6c93388a285230ae3302e\")"
     ]
   }
 }
