@@ -22,5 +22,7 @@ public interface LanguageContract {
         void loadLanguages(boolean onlineRequired);
 
         void sort(int option);
+
+        void addLanguage(String name, int score);
     }
 }

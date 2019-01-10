@@ -11,6 +11,7 @@ import com.jeanpigomez.codingtest.model.Language;
 import com.jeanpigomez.codingtest.network.repository.LanguageRepository;
 import com.jeanpigomez.codingtest.utils.schedulers.RunOn;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -61,6 +62,13 @@ public class LanguagePresenter implements LanguageContract.Presenter, LifecycleO
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE) public void onDetach() {
         // Clean up any no-longer-use resources here
         disposeBag.clear();
+    }
+
+    @Override
+    public void addLanguage(String name, int score) {
+        Language language = new Language(name, score, new Date().toString());
+        repository.addLanguage(language);
+        loadLanguages(false);
     }
 
     @Override

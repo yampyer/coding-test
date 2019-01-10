@@ -1,5 +1,6 @@
 package com.jeanpigomez.codingtest.network.repository;
 
+import android.os.AsyncTask;
 import android.support.annotation.VisibleForTesting;
 
 import com.jeanpigomez.codingtest.model.Language;
@@ -33,21 +34,16 @@ public class LanguageRepository implements LanguageDataSource {
         if (forceRemote) {
             return refreshData();
         } else {
-            if (caches.size() > 0) {
-                // if cache is available, return it immediately
-                return Flowable.just(caches);
-            } else {
-                // else return data from local storage
-                return localDataSource.loadLanguages(false)
-                        .take(1)
-                        .flatMap(Flowable::fromIterable)
-                        .doOnNext(language -> caches.add(language))
-                        .toList()
-                        .toFlowable()
-                        .filter(list -> !list.isEmpty())
-                        .switchIfEmpty(
-                                refreshData()); // If local data is empty, fetch from remote source instead.
-            }
+            // else return data from local storage
+            return localDataSource.loadLanguages(false)
+                    .take(1)
+                    .flatMap(Flowable::fromIterable)
+                    .doOnNext(language -> caches.add(language))
+                    .toList()
+                    .toFlowable()
+                    .filter(list -> !list.isEmpty())
+                    .switchIfEmpty(
+                            refreshData()); // If local data is empty, fetch from remote source instead.
         }
     }
 
@@ -71,8 +67,21 @@ public class LanguageRepository implements LanguageDataSource {
 
     @Override
     public void addLanguage(Language language) {
-        //Currently, we do not need this.
-        throw new UnsupportedOperationException("Unsupported operation");
+        new AddLanguage().execute(language);
+    }
+
+    private class AddLanguage extends AsyncTask<Language, Integer, Long> {
+        protected Long doInBackground(Language... languages) {
+            caches.add(languages[0]);
+            localDataSource.addLanguage(languages[0]);
+            return null;
+        }
+
+        protected void onProgressUpdate(Integer... progress) {
+        }
+
+        protected void onPostExecute(Long result) {
+        }
     }
 
     @Override

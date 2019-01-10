@@ -1,6 +1,7 @@
 package com.jeanpigomez.codingtest.ui.language;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -10,6 +11,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import com.jeanpigomez.codingtest.R;
@@ -86,6 +90,9 @@ public class LanguageListActivity extends BaseActivity implements LanguageContra
                         .setItems(R.array.sort_options, (dialogInterface, which) -> presenter.sort(which))
                         .show();
                 return true;
+            case R.id.action_add_language:
+                showAddLanguageDialog();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -116,6 +123,29 @@ public class LanguageListActivity extends BaseActivity implements LanguageContra
         if (refreshLayout.isRefreshing()) {
             refreshLayout.setRefreshing(false);
         }
+    }
+
+    private void showAddLanguageDialog() {
+        Dialog dialog = new Dialog(this, R.style.Dialog);
+        dialog.setContentView(R.layout.dialog_add_language);
+        dialog.setTitle(R.string.action_add_language);
+
+        EditText etName = dialog.findViewById(R.id.etName);
+        EditText etScore = dialog.findViewById(R.id.etScore);
+
+        Button btnAddLanguage = dialog.findViewById(R.id.btAdd);
+        btnAddLanguage.setOnClickListener(v -> {
+            if (!etName.getText().toString().isEmpty() || !etScore.getText().toString().isEmpty()) {
+                presenter.addLanguage(etName.getText().toString(),
+                        Integer.parseInt(etScore.getText().toString()));
+                dialog.dismiss();
+            }
+        });
+
+        Button btnCancel = dialog.findViewById(R.id.btCancel);
+        btnCancel.setOnClickListener(v -> dialog.dismiss());
+
+        dialog.show();
     }
 
     private void showNotification(String message) {

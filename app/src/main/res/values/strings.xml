@@ -13,4 +13,8 @@
     <string name="no_data_error">No data to display</string>
     <string name="time_passed">Passed!</string>
     <string name="close">Close</string>
+    <string name="add_language_description">Please enter a name and a score</string>
+    <string name="language_name">Language Name</string>
+    <string name="language_score">Language Score</string>
+    <string name="cancel">Cancel</string>
 </resources>
